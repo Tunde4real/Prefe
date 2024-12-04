@@ -45,12 +45,12 @@ def chrome(mode='h'):
     if mode == 'h':
         #  Headless mode
         chrome_options.add_argument("--headless")
-        driver = webdriver.Chrome(options=chrome_options, executable_path='/Users/ibrahimaderinto/Desktop/web scraping/Prefe/chromedriver')
+        driver = webdriver.Chrome(options=chrome_options)
         
     elif mode == 'b':
         # Browser mode
         chrome_options.add_argument("start-maximized")
-        driver = webdriver.Chrome(options=chrome_options, executable_path='/Users/ibrahimaderinto/Desktop/web scraping/Prefe/chromedriver')
+        driver = webdriver.Chrome(options=chrome_options)
 
     else:
         print("Mode is invalid")
@@ -255,7 +255,7 @@ def main():
     """
     logging.basicConfig(filename='logfile.log', filemode='w', format='%(asctime)s - %(message)s',\
                     datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
-    driver = chrome('b')
+    driver = chrome()
     Unes = Browser(driver, '20121')
     Unes.navigate_to_stores()
     Unes.scrape_stores()
