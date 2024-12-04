@@ -83,9 +83,9 @@ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like 
 '''
 
 # Endpoint for scraping stores
-# response = requests.get('https://www.spesaonline.unes.it/onboarding/services?cap=20121&latitude=45.4720482&longitude=9.1920381&city=Milan')
-# with open('response.json', 'w') as file:
-#     file.write(response.text)
+response = requests.get('https://www.spesaonline.unes.it/onboarding/services?cap=20121&latitude=45.4720482&longitude=9.1920381&city=Milan')
+with open('response.json', 'w') as file:
+    file.write(response.text)
 
 # Possible endpoint API for scraping products
 response = requests.get('https://www.spesaonline.unes.it/search?query=&production_0064-index%5Bpage%5D=1')
