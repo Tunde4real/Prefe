@@ -45,7 +45,7 @@ def chrome(mode='h'):
     if mode == 'h':
         #  Headless mode
         chrome_options.add_argument("--headless")
-        driver = webdriver.Chrome(options=chrome_options)
+        driver = webdriver.Chrome(options=chrome_options, executable_path='/Users/ibrahimaderinto/Desktop/web scraping/Prefe/chromedriver')
         
     elif mode == 'b':
         # Browser mode
@@ -166,8 +166,7 @@ class Browser:
             self.action.perform()
         except Exception:
             logging.exception('Could not click the search bar: ')
-            # visit the product category site instead
-            self.driver.get('https://www.spesaonline.unes.it/search?query=')
+            self.driver.get('https://www.spesaonline.unes.it/search?query=')    # visit the product category site instead
         time.sleep(5)   # sleep to slow down requests so as to not trigger anti bot actions
 
 
@@ -176,7 +175,7 @@ class Browser:
         """
         # click on "Modifica"
         self.driver.find_element(By.XPATH, '//*[@id="onboarding__subheader"]/div/a[2]').click()
-        time.sleep(3)
+        time.sleep(5)
 
         # click on next store
         next_store = self.driver.find_elements(By.XPATH, '//main/div[2]/div[3]/div/div[1]/div[1]/div[2]/div/div[2]/div')[self.stores_counter]
@@ -205,14 +204,14 @@ class Browser:
             self.action.perform()
         except Exception:
             logging.exception('Could not click the search bar: ')
-            # visit the product category site instead
-            self.driver.get('https://www.spesaonline.unes.it/search?query=')
+            self.driver.get('https://www.spesaonline.unes.it/search?query=') # visit the product category site instead
         time.sleep(5)   # sleep to slow down requests so as to not trigger anti bot actions
 
 
     def scrape_products(self) -> None:
+        """ Scrapes all products available. This should come after either of navigate_to_products_page or return_to_stores_page
         """
-        """
+        logging.info(f'Scraping for {self.current_store_name}')
         product_csv = csv.writer(open(f'{self.current_store_name} products.csv', 'w'))
         product_csv.writerow(['Name', 'Weight', 'Id', 'Details', 'Price', 'Price per Kg', 'Promotion Discount', 'Promotion End Date', 'Image Url'])
 
@@ -248,6 +247,7 @@ class Browser:
                 logging.exception('Could not click on the next buutton')
                 break
             time.sleep(2)   # sleep to slow down requests so as to not trigger anti bot actions
+        logging.info(f'Scrapped all available products for {self.current_store_name} store')
 
 
 def main():
