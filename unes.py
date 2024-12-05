@@ -45,7 +45,7 @@ def chrome(mode='h'):
     if mode == 'h':
         #  Headless mode
         chrome_options.add_argument("--headless")
-        driver = webdriver.Chrome(options=chrome_options, executable_path='/Users/ibrahimaderinto/Desktop/web scraping/Prefe/chromedriver')
+        driver = webdriver.Chrome(options=chrome_options)
         
     elif mode == 'b':
         # Browser mode
